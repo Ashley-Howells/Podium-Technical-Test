@@ -1,0 +1,100 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+    <div class="text-center">
+        @using (Html.BeginForm("ApplicantRequest", "Home", FormMethod.Post, new { Id = "App" }))
+        {
+            <p v-if="errors.length">
+                <b>Please correct the following error(s):</b>
+                <ul>
+                    <li v-for="error in errors">{{ error }}</li>
+                </ul>
+            </p>
+
+            <p>
+                <label for="name">Forname</label>
+                <input id="Forname"
+                       v-model="Forname"
+                       type="text"
+                       name="Forname">
+            </p>
+
+            <p>
+                <label for="name">Surname</label>
+                <input id="Surname"
+                       v-model="Surname"
+                       type="text"
+                       name="Surname">
+            </p>
+
+            <p>
+                <label for="age">Date Of Birth</label>
+                <input id="DateOfBirth"
+                       v-model="DateOfBirth"
+                       type="date"
+                       name="DateOfBirth">
+            </p>
+
+            <p>
+                <label for="movie">Email</label>
+                <input id="Email"
+                       v-model="Email"
+                       type="text"
+                       name="Email">
+            </p>
+
+            <p>
+                <input type="submit" value="Submit" v-on:click="checkForm">
+            </p>
+        }
+        <div id="SecondRow" v-show="a">
+            <h1>This is shown</h1>
+        </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    const SecondRow = new Vue({
+        el: '#SecondRow',
+        data: {
+            errors: [],
+            a: false
+        }
+    });
+    const app = new Vue({
+        el: '#App',
+        data: {
+            errors: [],
+            Forname: null,
+            Surname: null,
+            DateOfBirth: null,
+            Email: null
+        },
+        methods: {
+            checkForm: function (e) {
+                if (this.Forname && this.Surname && this.Email) {
+                    return true;
+                }
+
+                this.errors = [];
+
+                if (!this.Forname) {
+                    this.errors.push('Forname required.');
+                }
+                if (!this.Surname) {
+                    this.errors.push('Surname required.');
+                }
+                if (!this.Email) {
+                    this.errors.push('Email required.');
+                }
+                e.preventDefault();
+            }
+        }
+    });
+    if ('@ViewBag.UniqueID' != 'No id') {
+            SecondRow._data.a = true;
+        }
+    else {
+            SecondRow._data.a = false;
+    }
+</script>
