@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Podium_Technical_Test.Models
 {
@@ -12,7 +9,5 @@ namespace Podium_Technical_Test.Models
         public string Surname { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Email { get; set; }
-
-        public virtual ICollection<MortgageResult> MortgageResult { get; set; }
     }
 }

@@ -1,118 +1,127 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-    <div class="text-center">
-        <form id="App" v-show="a">
-            <p v-if="errors.length">
-                <b>Please correct the following error(s):</b>
-                <ul>
-                    <li v-for="error in errors">{{ error }}</li>
-                </ul>
-            </p>
-            <p>
-                <h4>Please Enter Details Below</h4>
-            </p>
-            <p>
-                <label for="name">Forname</label>
-                <input id="Forname"
-                       v-model="Forname"
-                       type="text"
-                       name="Forname">
-            </p>
-
-            <p>
-                <label for="name">Surname</label>
-                <input id="Surname"
-                       v-model="Surname"
-                       type="text"
-                       name="Surname">
-            </p>
-
-            <p>
-                <label for="age">Date Of Birth</label>
-                <input id="DateOfBirth"
-                       v-model="DateOfBirth"
-                       type="date"
-                       name="DateOfBirth">
-            </p>
-
-            <p>
-                <label for="movie">Email</label>
-                <input id="Email"
-                       v-model="Email"
-                       type="text"
-                       name="Email">
-            </p>
-
-            <p>
-                <input type="submit" value="Submit" v-on:click="checkForm">
-            </p>
-        </form>
-        <form id="SecondRow" v-show="a">
-            <p v-if="errors.length">
-                <b>Please correct the following error(s):</b>
-                <ul>
-                    <li v-for="error in errors">{{ error }}</li>
-                </ul>
-            </p>
-            <p>
-                <h4>Please Enter Details Below</h4>
-            </p>
-            <p>
-                <label for="name">Enter Property Value</label>
-                <input id="PropertyValue"
-                       v-model="PropertyValue"
-                       type="number"
-                       name="PropertyValue">
-            </p>
-
-            <p>
-                <label for="name">Enter Deposit Amount</label>
-                <input id="DepositAmount"
-                       v-model="DepositAmount"
-                       type="number"
-                       name="DepositAmount">
-            </p>
-
-            <p>
-                <input type="submit" value="Submit" v-on:click="CheckMortgage">
-            </p>
-        </form>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
-
-        <div id="flip-list-demo" class="demo">
-            <button v-on:click="shuffle">Shuffle</button>
-            <transition-group name="flip-list" tag="ul">
-                <li v-for="item in items" v-bind:key="item">
-                    {{ item }}
+<div class="text-center">
+    <form id="UserDetails" v-show="Visible">
+        <p v-if="errors.length">
+            <ul>
+                <li v-for="error in errors">
+                    <div class="alert">
+                        <strong>{{ error }}</strong>
+                    </div>
                 </li>
-            </transition-group>
-        </div>
+            </ul>
+        </p>
+        <p>
+            <h4>Please Enter Details Below</h4>
+        </p>
+        <p>
+            <label for="Forname">Forname</label>
+            <input id="Forname"
+                   v-model="Forname"
+                   type="text"
+                   name="Forname">
+        </p>
+        <p>
+            <label for="Surname">Surname</label>
+            <input id="Surname"
+                   v-model="Surname"
+                   type="text"
+                   name="Surname">
+        </p>
+        <p>
+            <label for="DateOfBirth">Date Of Birth</label>
+            <input id="DateOfBirth"
+                   v-model="DateOfBirth"
+                   type="date"
+                   name="DateOfBirth">
+        </p>
+        <p>
+            <label for="Email">Email</label>
+            <input id="Email"
+                   v-model="Email"
+                   type="text"
+                   name="Email">
+        </p>
+        <p>
+            <input type="submit" value="Submit" v-on:click="CheckDetails">
+        </p>
+    </form>
+    <form id="MortgageDetails" v-show="Visible">
+        <p v-if="errors.length">
+            <ul>
+                <li v-for="error in errors">
+                    <div class="alert">
+                        <strong>{{ error }}</strong>
+                    </div>
+                </li>
+            </ul>
+        </p>
+        <p>
+            <h4>Please Enter Details Below</h4>
+        </p>
+        <p>
+            <label for="PropertyValue">Enter Property Value</label>
+            <input id="PropertyValue"
+                   v-model="PropertyValue"
+                   type="number"
+                   name="PropertyValue">
+        </p>
+        <p>
+            <label for="DepositAmount">Enter Deposit Amount</label>
+            <input id="DepositAmount"
+                   v-model="DepositAmount"
+                   type="number"
+                   name="DepositAmount">
+        </p>
+        <p>
+            <input type="submit" value="Submit" v-on:click="CheckMortgage">
+        </p>
+    </form>
+    <div id="MortgageSearchResults" v-show="Visible">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Bank</th>
+                    <th scope="col">Interest Rate</th>
+                    <th scope="col">Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <transition-group name="Results-List" tag="tr">
+                    <tr v-for="item in Results" :key="item.id">
+                        <th scope="row">{{ item.Bank }}</th>
+                        <td>{{ item.InterestRate }}</td>
+                        <td>{{ item.Type }}</td>
+                    </tr>
+                </transition-group>
+            </tbody>
+        </table>
     </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-    new Vue({
-        el: '#flip-list-demo',
+    var UserUniqueID = "";
+    var MortgageSearchResults = new Vue({
+        el: '#MortgageSearchResults',
         data: {
-            items: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+            Visible: false,
+            Results: []
         },
         methods: {
-            shuffle: function () {
-                this.items = _.shuffle(this.items)
+            flush() {
+                this.Results.splice(0);
             }
         }
-    })
-    var UserUniqueID = "";
-    const SecondRow = new Vue({
-        el: '#SecondRow',
+    });
+    const MortgageDetails = new Vue({
+        el: '#MortgageDetails',
         data: {
             errors: [],
             PropertyValue: null,
             DepositAmount: null,
-            a: false
+            Visible: false
         },
         methods: {
             CheckMortgage: function (e) {
@@ -132,24 +141,26 @@
             }
         }
     });
-    const app = new Vue({
-        el: '#App',
+    const UserDetails = new Vue({
+        el: '#UserDetails',
         data: {
             errors: [],
             Forname: null,
             Surname: null,
             DateOfBirth: null,
             Email: null,
-            a: true
+            Visible: true
         },
         methods: {
-            checkForm: function (e) {
-                if (this.Forname && this.Surname && this.Email) {
+            CheckDetails: function (e) {
+                if (this.Forname && this.Surname && this.Email && this.DateOfBirth) {
                     PostUserData(this)
                 }
 
                 this.errors = [];
-
+                if (!this.DateOfBirth) {
+                    this.errors.push('Date Of Birth required.');
+                }
                 if (!this.Forname) {
                     this.errors.push('Forname required.');
                 }
@@ -165,22 +176,48 @@
     });
 
     function PostPropertyData(Data) {
-        var livedata = '@Url.Action("MortgageSearch")' + "?PropertyValue=" + Data.PropertyValue + "&DepositAmount=" + Data.DepositAmount + "&UniqueId=" + UserUniqueID;
-        $.getJSON(livedata, function (response) {
-            if (response == "Age") {
-                Swal.fire('Sorry, You need to be over the age of 18 to continue')
+        axios.get('/API/MortgageSearch', {
+            params: {
+                PropertyValue: Data.PropertyValue,
+                DepositAmount: Data.DepositAmount,
+                UniqueId: UserUniqueID,
             }
-            else if (response == "LTV") {
-                Swal.fire('Sorry, No Products Available For This Deposit Amount')
-            }
-        });
+        })
+            .then(function (response) {
+                MortgageSearchResults.flush();
+                MortgageSearchResults._data.Visible = true;
+                if (response.data == "Deposit To Low For Loan Amount") {
+                    MortgageSearchResults._data.Results.push({ InterestRate: "No Results Found" })
+                }
+                else {
+                    response.data.forEach(element => MortgageSearchResults._data.Results.push({ id: element.id, Bank: element.bank, InterestRate: element.interestRate + "%", Type: element.type }));
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
     function PostUserData(Data) {
-        var livedata = '@Url.Action("ApplicantRequest")' + "?Forname=" + Data.Forname + "&Surname=" + Data.Surname + "&Email=" + Data.Email + "&DateOfBirth=" + Data.DateOfBirth;
-        $.getJSON(livedata, function (response) {
-            SecondRow._data.a = true;
-            app._data.a = false;
-            UserUniqueID = response;
-        });
+        axios.get('/API/ApplicantRequest', {
+            params: {
+                Forname: Data.Forname,
+                Surname: Data.Surname,
+                Email: Data.Email,
+                DateOfBirth: Data.DateOfBirth
+            }
+        })
+            .then(function (response) {
+                if (response.data == "Age Below 18") {
+                    UserDetails.errors.push('Sorry, You need to be at least 18 to apply');
+                }
+                else {
+                    MortgageDetails._data.Visible = true;
+                    UserDetails._data.Visible = false;
+                    UserUniqueID = response.data;
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 </script>

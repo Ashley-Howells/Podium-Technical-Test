@@ -1,10 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EdK0EkpDT8zRW9gvbfOoOyHfmbT3VkH2PGhRDrUsTNqfWMLnplqMBAOcz8xL9IN30UZ0vVaUmlAGqQOsBwuT8w==",
+  "dgSpecHash": "7MPGbtf2XyV7XC4XgP2+V2DmwQSA7RD5AXO4FNXCazMjS4fRo+iRnDdkObEI0yQEWeQy/FJ9lJMzqw2r9ZbbXw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\AshleyHowells\\source\\repos\\Podium-Technical-Test\\Podium-Technical-Test\\Podium-Technical-Test.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\AshleyHowells\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
-  ],
+  "projectFilePath": "C:\\Users\\AshleyHowells\\Documents\\GitHub\\Podium-Technical-Test\\Podium-Technical-Test.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

@@ -24,10 +24,19 @@ a {
   border-color: #1861ac;
 }
 
+.alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+}
+li {
+    list-style-type: none;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 @media (min-width: 768px) {
   html {
